@@ -1,7 +1,11 @@
+hellojpa/RoleType.java
+ hellojpa.RoleType
+hellojpa/Member.java
+ hellojpa.Member
+hellojpa/Member2.java
+ hellojpa.Member2
 hellojpa/config/JpaConfig.java
  hellojpa.config.JpaConfig
  hellojpa.config.JpaConfig$1
-hellojpa/Member.java
- hellojpa.Member
 hellojpa/JpaMain.java
  hellojpa.JpaMain

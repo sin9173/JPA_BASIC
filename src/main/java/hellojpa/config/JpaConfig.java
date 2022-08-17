@@ -31,15 +31,24 @@ public class JpaConfig {
         properties.put("javax.persistence.provider", "org.hibernate.jpa.HibernatePersistenceProvider");
         properties.put("javax.persistence.transactionType", "RESOURCE_LOCAL");
 
+        //필수 속성
         properties.put("javax.persistence.jdbc.driver", "com.mysql.cj.jdbc.Driver");
         properties.put("javax.persistence.jdbc.user", "root");
         properties.put("javax.persistence.jdbc.password", "1111");
         properties.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost:3306/test");
-        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 
+        //옵션
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.use_sql_comments", "true");
+        properties.put("hibernate.jdbc.batch_size", "10"); //지정한 값만큼 모아서 batch insert 수행
+        properties.put("hibernate.hbm2ddl.auto", "update");
+        //create : 테이블을 DROP 한 후 재생성
+        //create-drop : 테이블을 재생성한 후 종료시 DROP
+        //update : 변경사항이 있을시 Alter
+        //validate : 테이블과 매핑이 일치하는지 확인
+        //none : 사용하지 않음
 
         return properties;
     }
