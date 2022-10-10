@@ -10,8 +10,64 @@ import java.util.List;
 public class JpaMain {
 
     public static void main(String[] args) {
-        enumTest();
+        //enumTest();
+        //jpqlSelect();
+        relationMapping1();
     }
+
+    public static void relationMapping1() {
+        EntityManagerFactory emf = JpaConfig.getEntityManagerFactory();
+
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member4 member = new Member4();
+            member.setUsername("member1");
+            //member.setTeamId(team.getId());
+            member.setTeam(team);
+            em.persist(member);
+
+            //team.getMembers().add(member);
+
+//            em.flush();
+//            em.clear();
+
+            Member4 findMember = em.find(Member4.class, member.getId());
+
+            //System.out.println(findMember);
+
+            //영속성 컨텍스트에 Members 를 가지고 있지 않은 Team 이 있으면 Members 가 없는 Team 을 가져옴 (양쪽 모두 값을 셋팅해줘야함)
+            //연관된 객체를 가져올때 쿼리를 수행
+            List<Member4> members = findMember.getTeam().getMembers();
+//            Team findTeam = findMember.getTeam();
+//            System.out.println("findTeam = " + findTeam.getName());
+
+            for(Member4 member1 : members) {
+                System.out.println("m = " + member1.getUsername());
+            }
+            //
+            //Team newTeam = em.find(Team.class, 100L);
+            //findMember.setTeam(newTeam);
+
+
+
+            tx.commit();
+        }catch (Exception e) {
+            tx.rollback();
+        } finally {
+            em.close();
+        }
+
+        emf.close();
+    }
+
 
 
     public static void enumTest() {
@@ -231,14 +287,14 @@ public class JpaMain {
 
         try {
             //JPQL SELECT
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList(); //Member 객체를 대상으로 조회
-
-            for(Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class) //객체를 대상으로 쿼리수행
+//                    .setFirstResult(5)
+//                    .setMaxResults(8) //5번부터 8개를 가져옴(페이지네이션) (limit 5 offset 8)
+//                    .getResultList(); //Member 객체를 대상으로 조회
+//
+//            for(Member member : result) {
+//                System.out.println("member.name = " + member.getName());
+//            }
 
             tx.commit();
         }catch (Exception e) {

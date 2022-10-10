@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+//@Entity
 @Table(name = "Member") //테이블 이름 지정 가능 (없을 경우 클래스명으로 지정)
 public class Member {
 
