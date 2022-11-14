@@ -12,7 +12,35 @@ public class JpaMain {
     public static void main(String[] args) {
         //enumTest();
         //jpqlSelect();
-        relationMapping1();
+        //relationMapping1();
+        inheritMapping();
+    }
+
+    public static void inheritMapping() {
+        EntityManagerFactory emf = JpaConfig.getEntityManagerFactory();
+
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+            Movie movie = new Movie();
+            movie.setDirector("aaaa");
+            movie.setActor("bbbb");
+            movie.setName("안녕영화");
+            movie.setPrice(10000);
+
+            em.persist(movie);
+
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+        } finally {
+            em.close();
+        }
+
+        emf.close();
     }
 
     public static void relationMapping1() {

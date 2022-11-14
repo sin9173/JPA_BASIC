@@ -13,5 +13,13 @@ hellojpa/Team.java
  hellojpa.Team
 hellojpa/Member4.java
  hellojpa.Member4
+hellojpa/Item.java
+ hellojpa.Item
+hellojpa/Book.java
+ hellojpa.Book
+hellojpa/Movie.java
+ hellojpa.Movie
+hellojpa/Album.java
+ hellojpa.Album
 hellojpa/JpaMain.java
  hellojpa.JpaMain

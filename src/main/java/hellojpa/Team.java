@@ -16,7 +16,9 @@ public class Team {
 
     //관계형 DB와 다르게 서로 다른 단방향관계 두개를 생성해서 양방향으로 사용
     //
-    @OneToMany(mappedBy = "team")
+    //@OneToMany(mappedBy = "team") : 일대다 양방향
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID")
     private List<Member4> members = new ArrayList<>();
 
     public Long getId() {
